@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:TreeViewXamarin"
+             xmlns:syncfusion="clr-namespace:Syncfusion.XForms.TreeView;assembly=Syncfusion.SfTreeView.XForms"
+             xmlns:syncfusion1="clr-namespace:Syncfusion.TreeView.Engine;assembly=Syncfusion.SfTreeView.XForms"
+             x:Class="TreeViewXamarin.MainPage">
+    <ContentPage.BindingContext>
+        <local:TreeViewViewModel x:Name="viewModel"/>
+    </ContentPage.BindingContext>
+    <StackLayout VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand">
+        <syncfusion:SfTreeView x:Name="treeView"
+                                ItemHeight="40"
+                                Indentation="30"
+                                ExpanderWidth="20"               
+                                ItemsSource="{Binding ImageNodeInfo}"  
+                                AutoExpandMode="RootNodesExpanded" NodePopulationMode="Instant">
+            <syncfusion:SfTreeView.HierarchyPropertyDescriptors>
+                <syncfusion1:HierarchyPropertyDescriptor TargetType="{x:Type local:Countries}" ChildPropertyName="States"/>
+                <syncfusion1:HierarchyPropertyDescriptor TargetType="{x:Type local:States}" ChildPropertyName="Cities"/>
+            </syncfusion:SfTreeView.HierarchyPropertyDescriptors>
+            <syncfusion:SfTreeView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid x:Name="grid" BackgroundColor="Transparent">
+                            <Label LineBreakMode="WordWrap"
+                                                    Text="{Binding Name}"
+                                                    TextColor="Black"
+                                                    VerticalTextAlignment="Center"/>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </syncfusion:SfTreeView.ItemTemplate>
+        </syncfusion:SfTreeView>
+    </StackLayout>
+</ContentPage>
